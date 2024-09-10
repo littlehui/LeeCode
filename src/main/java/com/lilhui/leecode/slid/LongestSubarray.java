@@ -39,19 +39,17 @@ public class LongestSubarray {
 
     public int longestSubarray(int[] nums) {
         int n = nums.length;
-        int k = 1;
         int left = 0, lsum = 0, rsum = 0;
         int ans = 0;
+        int k = 1;
         for (int right = 0; right < n; ++right) {
             rsum += (1 - nums[right]);
-            if (nums[right] == 0) {
-                ans = right + 1;
-            }
             while (lsum < rsum - k) {
                 lsum += (1 - nums[left]);
                 ++left;
             }
+            ans = Math.max(ans, right - left + 1);
         }
-        return ans;
+        return ans - 1;
     }
 }
